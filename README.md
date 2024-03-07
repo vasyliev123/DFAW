@@ -1,38 +1,8 @@
-# create-svelte
+Don't Forget a Word
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+I love to read books. But every time I come across a word I don't know, I just skip it and forget about it in a second. And that doesn't help my vocabulary growth at all. After finishing yet another book, I look back and realize I didn't learn any new words. That's awfully frustrating.
 
-## Creating a project
+So I decided to develop a solution to help me focus on remembering new words. My solution is as straightforward as it gets. You type in an unfamiliar word, the full definition gets displayed. You can then add it to your personal dictionary. And then you can test yourself on the words you've added. Simple!
 
-If you're seeing this, you've probably already done this step. Congrats!
+Please enjoy my app and let me know what you think. I'm open to any feedback. I hope you find it as useful as I do.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
