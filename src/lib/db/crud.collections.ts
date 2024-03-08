@@ -26,3 +26,14 @@ export const deleteCollection = async (id: number) => {
 		}
 	});
 };
+
+export const updateCollection = async (id: number, title: string) => {
+    return await prisma.collection.update({
+        where: {
+            id
+        },
+        data: {
+            title
+        }
+    });
+};
