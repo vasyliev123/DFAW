@@ -5,8 +5,6 @@ import type { ServerLoad } from '@sveltejs/kit';
             user: locals.user
         }
     }
-    console.log('no user found');
-	console.log(locals.user);
     return {
         user: undefined
     }

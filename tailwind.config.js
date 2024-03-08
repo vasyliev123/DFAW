@@ -14,6 +14,16 @@ const config = {
 			}
 		},
 		extend: {
+			animation: {
+				progress: 'progress 1s infinite linear',
+			  },
+			  keyframes: {
+				progress: {
+				  '0%': { transform: ' translateX(0) scaleX(0)' },
+				  '40%': { transform: 'translateX(0) scaleX(0.4)' },
+				  '100%': { transform: 'translateX(100%) scaleX(0.5)' },
+				},
+			  },
 			colors: {
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",

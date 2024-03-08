@@ -4,12 +4,14 @@
   import { ScrollArea } from "$lib/components/ui/scroll-area";
   import { Separator } from "$lib/components/ui/separator";
   import { Badge } from "$lib/components/ui/badge";
+  import Button from "$lib/components/ui/button/button.svelte";
   export let definition: WordDefinition = [];
 </script>
 
-<div class="flex-1  mt-10 mb-28">
+<div class="flex-1 mb-28 flex justify-center flex-col static ">
+
         {#each definition as word}
-            <div class="flex flex-col content-center h-full max-w-4xl">
+            <div class="flex flex-col items-start content-center h-full max-w-4xl">
              {#if word.phonetic }
                 <div class="font-semibold italics text-gray-400 text-xl ">
                     <p>{word.phonetic}</p>

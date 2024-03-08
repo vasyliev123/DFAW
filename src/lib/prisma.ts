@@ -35,7 +35,6 @@ export const createUser = async (email: string, username: string, password: stri
 		});
 		return user;
 	} catch (err) {
-		console.error(err);
 		return {
 			error: 'Error creating user'
 		};
@@ -70,4 +69,26 @@ export const loginUser = async (email: string, password: string) => {
 	});
 
 	return { token };
+}
+
+export const addWord = async (word: string, collectionId: number) => {
+	const newWord = await prisma.word.create({
+		data: {
+			word,
+			collectionId
+		}
+	});
+	return newWord;
+}
+
+export const getCollections = async (userId: number) => {
+	const collections = await prisma.wordsCollection.findMany({
+		where: {
+			userId
+		},
+		include: {
+			words: true
+		}
+	});
+	return collections;
 }
