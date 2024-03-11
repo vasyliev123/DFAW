@@ -21,14 +21,23 @@ export const GET: RequestHandler = async ({ url }) => {
 };
 
 
-export const POST: RequestHandler = async ({ url }) => {
-	const title = url.searchParams.get('title');
-	if (!title) {
-		return new Response('Title is required', { status: 400 });
+export const POST: RequestHandler = async ({ request }) => {
+	console.log('POST');
+	try {
+		const {title} = await request.json();
+		if (!title) {
+			console.log('Title is required');
+			return new Response('Title is required', { status: 400 });
+		}
+		const collection = await createCollection(title);
+		const res = new Response(JSON.stringify(collection));
+		console.log('res', res);
+		return res;
+	} catch (error) {
+		let message = 'Unknown Error'
+		if (error instanceof Error) message = error.message
+			return new Response(message, { status: 500 });
 	}
-	const collection = await createCollection(title);
-	const res = new Response(JSON.stringify(collection));
-	return res;
 };
 
 

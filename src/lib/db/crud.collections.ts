@@ -9,13 +9,20 @@ export const createCollection = async (title: string) => {
 };
 
 export const getCollections = async () => {
-	return await prisma.collection.findMany();
+	return await prisma.collection.findMany({
+		include: {
+			words: true
+		}
+	});
 };
 
 export const getCollection = async (id: number) => {
 	return await prisma.word.findUnique({
 		where: {
 			id
+		},
+		include: {
+			words: true
 		}
 	});
 };

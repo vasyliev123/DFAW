@@ -2,7 +2,8 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { cubicOut } from "svelte/easing";
 import type { TransitionConfig } from "svelte/transition";
-
+import { collections } from "./stores/collections";
+import type { RequestEvent } from "@sveltejs/kit";
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
@@ -59,4 +60,22 @@ export const flyAndScale = (
         },
         easing: cubicOut
     };
+};
+
+
+export const addCollection = async ({title, event}: { title: string, event: RequestEvent }) => {
+    try {
+        const res = await event.fetch('/api/collections', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: title })
+        });
+        const json = await res.json();
+        collections.update((state) => [...state, json]);
+        return json;
+    } catch (error) {
+        console.error(error);
+    }
 };
