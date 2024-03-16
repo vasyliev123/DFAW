@@ -12,8 +12,8 @@ export const GET: RequestHandler = async ({url}) => {
     const res = new Response(JSON.stringify(words));
     return res;
 };
-export const POST: RequestHandler = async ({url}) => {
-	const word = url.searchParams.get('word');
+export const POST: RequestHandler = async ({request}) => {
+	const word = await request.json();
     if (!word) {
         return new Response('Word is required', { status: 400 });
     }
@@ -22,8 +22,8 @@ export const POST: RequestHandler = async ({url}) => {
     return res;
 };
 
-export const DELETE: RequestHandler = async ({url}) => {
-	const id = url.searchParams.get('id');
+export const DELETE: RequestHandler = async ({request}) => {
+	const id = await request.json();
     if (!id) {
         return new Response('ID is required', { status: 400 });
     }

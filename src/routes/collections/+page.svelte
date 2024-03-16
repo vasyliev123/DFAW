@@ -4,12 +4,19 @@
 	import * as Table from '$lib/components/ui/table';
 	import { collections } from '$lib/stores/collections';
 	import NewCollectionDialog from '$lib/components/ui/NewCollectionDialog.svelte';
+	import { goto } from '$app/navigation';
 	export let data: PageServerData;
 	let col = data.collections;
 	collections.set(data.collections);
+	console.log(col);
 	collections.subscribe((value) => {
 		col = value;
 	});
+	const deleteCollection = async (e: Event) => {
+		const id = (e.target as HTMLInputElement).id;
+		console.log(id);
+		// deleteCollection(id);
+	};
 	let table = true;
 </script>
 
@@ -19,10 +26,8 @@
 			<div class="m-3 flex flex-row justify-end space-x-5">
 				<NewCollectionDialog data={data.form} />
 				<!-- <Button class="font-semibold" on:click={addCollection}>Add Collection</Button> -->
-				<Button on:click={() => (table = false)} size="icon" variant="outline"
-					>
-
-							<svg
+				<Button on:click={() => (table = false)} size="icon" variant="outline">
+					<svg
 						class="h-6 w-6 text-secondary-foreground"
 						aria-hidden="true"
 						xmlns="http://www.w3.org/2000/svg"
@@ -36,9 +41,7 @@
 							d="M9 8h10M9 12h10M9 16h10M5 8h0m0 4h0m0 4h0"
 						/>
 					</svg>
-
-					</Button
-				>
+				</Button>
 			</div>
 
 			{#if col.length > 0}
@@ -55,37 +58,36 @@
 						<Table.Row>
 							<Table.Head class="flex-1">Title</Table.Head>
 							<Table.Head class="text-right">Words</Table.Head>
-							<Table.Head class="text-right"></Table.Head>
+							<!-- <Table.Head class="text-right"></Table.Head> -->
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>
 						{#each col as collection}
-							<Table.Row>
-								<Table.Cell class="flex-1">{collection.title}</Table.Cell>
-								<Table.Cell class="text-right">asdas</Table.Cell>
-								<Table.Cell class="text-right items-end flex justify-end">
-									<form method="DELETE">
-										<button type="submit">
-									<svg
-										class="h-6 w-6 ml-2 text-muted-foreground"
-										aria-hidden="true"
-										xmlns="http://www.w3.org/2000/svg"
-										fill="none"
-										viewBox="0 0 24 24"
-									>
-										<path
-											stroke="currentColor"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="2"
-											d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
-										/>
-									</svg>
-								</button>
-							</form>
-								</Table.Cell>
-								
-							</Table.Row>
+						<Table.Row on:click={()=>goto(`/collections/${collection.id}`)}>
+									
+									<Table.Cell class="flex-1">{collection.title}</Table.Cell>
+									<Table.Cell class="text-right">{collection.words.length}</Table.Cell>
+									<!-- <Table.Cell class="flex items-end justify-end text-right">
+										<button type="reset" on:click={deleteCollection} id={collection.id}>
+											<svg
+												class="ml-2 h-6 w-6 text-muted-foreground"
+												aria-hidden="true"
+												xmlns="http://www.w3.org/2000/svg"
+												fill="none"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke="currentColor"
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+												/>
+											</svg>
+										</button>
+									</Table.Cell> -->
+					
+								</Table.Row>
 						{/each}
 					</Table.Body>
 				</Table.Root>

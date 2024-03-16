@@ -41,9 +41,8 @@ export const POST: RequestHandler = async ({ request }) => {
 };
 
 
-export const PUT: RequestHandler = async ({ url }) => {
-	const id = url.searchParams.get('id');
-	const title = url.searchParams.get('title');
+export const PUT: RequestHandler = async ({ request }) => {
+	const { id, title } = await request.json();
 	if (!id || !title) {
 		return new Response('ID and title are required', { status: 400 });
 	}
@@ -53,8 +52,8 @@ export const PUT: RequestHandler = async ({ url }) => {
 };
 
 
-export const DELETE: RequestHandler = async ({ url }) => {
-	const id = url.searchParams.get('id');
+export const DELETE: RequestHandler = async ({ request }) => {
+	const id = await request.json();
 	if (!id) {
 		return new Response('ID is required', { status: 400 });
 	}

@@ -7,10 +7,7 @@
 <div class="relative bg-background">
 	<ModeWatcher />
 	<div class="flex flex-row">
-		<SidePanel />
-		<div class="flex-1">
 			<slot/>
-		</div>
 	</div>
  
 </div>

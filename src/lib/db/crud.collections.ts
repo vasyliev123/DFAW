@@ -4,6 +4,9 @@ export const createCollection = async (title: string) => {
 	return await prisma.collection.create({
 		data: {
 			title
+		},
+		include: {
+			words: true
 		}
 	});
 };
@@ -17,7 +20,7 @@ export const getCollections = async () => {
 };
 
 export const getCollection = async (id: number) => {
-	return await prisma.word.findUnique({
+	return await prisma.collection.findUnique({
 		where: {
 			id
 		},

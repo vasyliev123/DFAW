@@ -1,11 +1,9 @@
 import type { PageServerLoad, Actions } from "./$types.js";
-import { message } from "sveltekit-superforms";
 import { fail } from "@sveltejs/kit";
 import { superValidate } from "sveltekit-superforms";
 import { formSchema } from "./schema";
 import { zod } from "sveltekit-superforms/adapters";
 import { addCollection } from "$lib/utils.js";
-import type { Collections } from "$lib/types/Collections";
 export const load: PageServerLoad = async ({fetch}) => {
     const collections = await fetch('/api/collections', {
         method: 'GET',
@@ -32,4 +30,4 @@ export const actions: Actions = {
             collection
         }
     },
-  };
+};

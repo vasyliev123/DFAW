@@ -34,4 +34,4 @@ type WordDefinition = Word[];
 type WordDefinitionResponse = WordDefinition | NoDefinitionsError;
 
 export type {WordDefinitionResponse, WordDefinition};
- 
+export type {Word};
